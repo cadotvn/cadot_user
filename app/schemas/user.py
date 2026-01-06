@@ -82,3 +82,18 @@ class UserPasswordUpdate(BaseModel):
     
     old_password: str = Field(..., min_length=8)
     new_password: str = Field(..., min_length=8)
+
+
+class LoginRequest(BaseModel):
+    """Schema for user login request."""
+    
+    email_or_username: str = Field(..., description="User email or username")
+    password: str = Field(..., min_length=1, description="User password")
+
+
+class LoginResponse(BaseModel):
+    """Schema for login response with token and user information."""
+    
+    access_token: str
+    token_type: str = "bearer"
+    user: User
